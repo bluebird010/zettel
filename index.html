@@ -2,47 +2,48 @@
 <html lang="ko">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>다른 방식으로 다시 보기 — Ways of Seeing, Again</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>다른 방식으로 다시 보기 — 이미지 제텔카스텐</title>
+<link rel="stylesheet" href="assets/styles.css">
 <style>
-:root{--bg:#EFECE4;--paper:#FBF9F4;--ink:#242019;--sub:#6B6459;--line:#DAD3C6;--accent:#8FA6B5}
-html[data-theme="dark"]{color-scheme:dark;--bg:#1B1A18;--paper:#252320;--ink:#EAE6DE;--sub:#9C968A;--line:#3B3833}
-*{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Malgun Gothic",sans-serif;-webkit-font-smoothing:antialiased}
-.wrap{max-width:460px;margin:0 auto;padding:56px 22px 70px}
-.k{font-family:ui-monospace,Menlo,monospace;font-size:11px;letter-spacing:.14em;color:var(--sub)}
-h1{font-family:Georgia,"Times New Roman",serif;font-weight:400;font-size:32px;line-height:1.28;margin:10px 0 6px}
-.en{font-family:Georgia,serif;font-style:italic;color:var(--sub);font-size:16px;margin:0 0 14px}
-.lead{font-size:14px;line-height:1.8;color:var(--sub);margin:0 0 30px;text-wrap:pretty}
-.grp{font-family:ui-monospace,Menlo,monospace;font-size:10.5px;letter-spacing:.12em;color:var(--sub);margin:26px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--line)}
-a.card{display:flex;align-items:center;gap:14px;text-decoration:none;color:inherit;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:15px 17px;margin-bottom:10px;transition:transform .12s,border-color .12s}
-a.card:hover{transform:translateY(-1px);border-color:var(--accent)}
-.dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
-.tt{font-size:15.5px;font-weight:700}
-.ds{font-size:12px;color:var(--sub);margin-top:2px;line-height:1.5}
-.ar{margin-left:auto;color:var(--sub);font-size:18px}
-footer{margin-top:34px;font-family:ui-monospace,Menlo,monospace;font-size:10.5px;color:var(--sub);line-height:1.8;border-top:1px solid var(--line);padding-top:16px}
-#tg-theme{font:inherit;font-family:ui-monospace,Menlo,monospace;font-size:10.5px;margin-top:12px;padding:7px 14px;border:1px solid var(--line);border-radius:999px;background:var(--paper);color:var(--sub);cursor:pointer}
+html[data-theme="dark"]{color-scheme:dark;--surface-bg:#1B1A18;--paper-1:#252320;--border-hairline:#3B3833;--text-body:#EAE6DE;--text-secondary:#B8B2A6;--text-meta:#8E887C;--ink-1:#EAE6DE;--ink-2:#C8C2B6;--photo-placeholder-bg:#2C2A27}
+body{margin:0;background:var(--surface-bg);font-family:var(--font-sans);letter-spacing:var(--ls-sans);color:var(--text-body)}
+a{color:var(--ink-1)}a:hover{color:var(--text-secondary)}
+.wrap{max-width:560px;margin:0 auto;padding:0 20px 130px;min-height:100vh;box-sizing:border-box;display:flex;flex-direction:column;justify-content:center}
+.k{font-family:var(--font-mono);font-size:11px;letter-spacing:.12em;color:var(--text-meta)}
+h1{font-family:var(--font-card-title);font-weight:400;font-size:38px;line-height:1.35;margin:10px 0 12px}
+.lede{font-size:14.5px;line-height:1.85;color:var(--text-secondary);margin:0 0 26px;text-wrap:pretty}
+.strips{display:flex;height:7px;border-radius:4px;overflow:hidden;margin:0 0 26px}
+.strips span{flex:1}
+.menu{display:flex;flex-direction:column;gap:10px}
+.menu a{display:block;text-decoration:none;background:var(--paper-1);border:1px solid var(--border-hairline);border-radius:12px;padding:16px 18px}
+.menu a b{font-size:16px;font-weight:800;color:var(--ink-1)}
+.menu a span{display:block;font-size:12.5px;line-height:1.7;color:var(--text-secondary);margin-top:3px}
+.menu a .no{float:right;font-family:var(--font-mono);font-size:11px;color:var(--text-meta);margin-top:3px}
+footer{margin-top:30px;font-family:var(--font-mono);font-size:11px;color:var(--text-meta);line-height:1.9}
+.tabbar{position:fixed;left:0;right:0;bottom:0;z-index:60;display:flex;align-items:center;gap:5px;padding:8px 12px calc(8px + env(safe-area-inset-bottom));background:var(--paper-1);border-top:1px solid var(--border-hairline)}
+.tabbar a.tb{flex:1;text-align:center;font-size:12.5px;font-weight:700;color:var(--text-secondary);text-decoration:none;padding:10px 0;border-radius:9px}
+.tabbar .tbt{font:inherit;font-size:11.5px;font-weight:700;padding:10px 11px;border:1px solid var(--border-hairline);border-radius:9px;background:transparent;color:var(--text-secondary);cursor:pointer;white-space:nowrap}
 </style>
 </head>
 <body>
 <div class="wrap">
-<div class="k">IMAGE ZETTELKASTEN · 김영휘 · 2026</div>
+<div class="k">IMAGE ZETTELKASTEN · 2026. 3 – 7 · 김영휘</div>
 <h1>다른 방식으로<br>다시 보기</h1>
-<p class="en">Ways of Seeing, Again</p>
-<p class="lead">일상 사진을 메모로, 메모를 카드 107장으로 격상시킨 시각 리터러시 아카이브. 아래에서 원하는 곳으로 들어가세요.</p>
-
-<div class="grp">보기 · BROWSE</div>
-<a class="card" href="archive.html"><span class="dot" style="background:#8FA6B5"></span><span><span class="tt">웹 아카이브 · Web Archive</span><span class="ds">카드 107장 + 임시 메모 전체 (한국어)</span></span><span class="ar">→</span></a>
-<a class="card" href="guide.html"><span class="dot" style="background:#CFCDDA"></span><span><span class="tt">설명서 · Manual</span><span class="ds">카드 읽는 법 · 등급 · 분류 체계 — 한국어/EN 전환</span></span><span class="ar">→</span></a>
-<a class="card" href="retro.html"><span class="dot" style="background:#93B5A4"></span><span><span class="tt">회고 · Retrospectives</span><span class="ds">4주간의 수집 + 수업 후 회고 — 한국어/EN 전환</span></span><span class="ar">→</span></a>
-
-<footer>«다른 방식으로 다시 보기» — 존 버거 «Ways of Seeing» 오마주<br>107 cards · 8 chapters · 4 packs<br><button id="tg-theme">야간 모드</button></footer>
+<p class="lede">일상 사진을 메모로, 메모를 카드로 격상시킨 이미지 제텔카스텐 — 영구 메모 107장 · 챕터 8 · 팩 4종. 제목은 존 버거 «Ways of Seeing»에서 빌려, 반 발짝 비틀었다.</p>
+<div class="strips"><span style="background:#D6BFD0"></span><span style="background:#B7CEDC"></span><span style="background:#DBC9A8"></span><span style="background:#BECDB4"></span><span style="background:#C3C0DE"></span><span style="background:#DEBCB8"></span><span style="background:#D3CEC4"></span><span style="background:#E0D6A6"></span></div>
+<div class="menu">
+<a href="archive.html"><span class="no">107 + 123</span><b>웹 아카이브</b><span>영구 메모 카드 107장과 임시 메모 전체 — 사진과 전문 읽기.</span></a>
+<a href="retro.html"><span class="no">5 ESSAYS</span><b>회고 모음</b><span>1–4주차, 그리고 수업을 마친 뒤의 회고. 한/EN.</span></a>
+<a href="guide.html"><span class="no">MANUAL</span><b>설명서</b><span>카드 읽는 법 · 여덟 개의 방 · 등급과 루브릭 · 분류 체계.</span></a>
 </div>
+<footer>«다른 방식으로 다시 보기» · 김영휘 · 2026</footer>
+</div>
+<nav class="tabbar"><a class="tb" href="archive.html">아카이브</a><a class="tb" href="retro.html">회고</a><a class="tb" href="guide.html">설명서</a><button class="tbt" id="tg-theme">야간</button></nav>
 <script>
 (function () {
   var r = document.documentElement, b = document.getElementById('tg-theme');
-  function ap(t) { r.setAttribute('data-theme', t); b.textContent = t === 'dark' ? '주간 모드' : '야간 모드'; }
+  function ap(t) { r.setAttribute('data-theme', t); b.textContent = t === 'dark' ? '주간' : '야간'; }
   var t = 'light';
   try { t = localStorage.getItem('zettel-theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'); } catch (e) {}
   ap(t);
