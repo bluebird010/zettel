@@ -4,23 +4,22 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>설명서 — 다른 방식으로 다시 보기 · Manual</title>
-<link rel="stylesheet" href="assets/styles.css">
+<link rel="stylesheet" href="styles.css">
 <style>
   html[data-theme="dark"]{color-scheme:dark;--surface-bg:#1B1A18;--paper-1:#252320;--border-hairline:#3B3833;--text-body:#EAE6DE;--text-secondary:#B8B2A6;--text-meta:#8E887C;--ink-1:#EAE6DE;--ink-2:#C8C2B6;--photo-placeholder-bg:#2C2A27}
   body { margin: 0; background: var(--surface-bg); font-family: var(--font-sans); letter-spacing: var(--ls-sans); color: var(--text-body); }
   a { color: var(--ink-1); } a:hover { color: var(--text-secondary); }
-  .wrap { max-width: 560px; margin: 0 auto; padding: 0 20px 130px; }
-  header.hero { padding: 44px 0 22px; }
+  .wrap { max-width: 560px; margin: 0 auto; padding: 0 20px 110px; }
+  header.hero { padding: 44px 0 22px; position: relative; }
+  .corner { position: absolute; top: 40px; right: 0; display: flex; gap: 6px; }
+  .tbt { font: inherit; font-size: 11.5px; font-weight: 700; padding: 7px 12px; border: 1px solid var(--border-hairline); border-radius: 999px; background: var(--paper-1); color: var(--text-secondary); cursor: pointer; white-space: nowrap; }
   .k { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; color: var(--text-meta); }
   h1 { font-family: var(--font-card-title); font-weight: 400; font-size: 34px; line-height: 1.3; margin: 8px 0 10px; }
   .hero p { font-size: 14.5px; line-height: 1.85; color: var(--text-secondary); margin: 0; text-wrap: pretty; }
-  nav { position: sticky; top: 0; z-index: 10; background: var(--surface-bg); padding: 10px 0; display: flex; gap: 6px; overflow-x: auto; -webkit-overflow-scrolling: touch; border-bottom: 1px solid var(--border-hairline); }
+  nav { position: fixed; left: 0; right: 0; bottom: 0; z-index: 60; background: var(--paper-1); padding: 10px 12px calc(10px + env(safe-area-inset-bottom)); display: flex; gap: 6px; overflow-x: auto; -webkit-overflow-scrolling: touch; border-top: 1px solid var(--border-hairline); }
+  nav::-webkit-scrollbar { display: none; }
   nav a { flex-shrink: 0; font-size: 12.5px; padding: 6px 12px; border: 1px solid var(--border-hairline); border-radius: 999px; background: var(--paper-1); text-decoration: none; color: var(--text-secondary); }
-  .tabbar { position: fixed; left: 0; right: 0; top: auto; bottom: 0; z-index: 60; display: flex; align-items: center; gap: 5px; padding: 8px 12px calc(8px + env(safe-area-inset-bottom)); background: var(--paper-1); border-top: 1px solid var(--border-hairline); }
-  .tabbar a.tb { flex: 1; text-align: center; font-size: 12.5px; font-weight: 700; color: var(--text-secondary); text-decoration: none; padding: 10px 0; border-radius: 9px; }
-  .tabbar a.tb.on { background: var(--ink-1); color: var(--paper-1); }
-  .tabbar .tbt { font: inherit; font-size: 11.5px; font-weight: 700; padding: 10px 11px; border: 1px solid var(--border-hairline); border-radius: 9px; background: transparent; color: var(--text-secondary); cursor: pointer; white-space: nowrap; }
-  section { padding: 30px 0 6px; scroll-margin-top: 58px; }
+  section { padding: 30px 0 6px; scroll-margin-top: 12px; }
   h2 { font-family: var(--font-card-title); font-weight: 400; font-size: 22px; margin: 0 0 14px; }
   .card { background: var(--paper-1); border: 1px solid var(--border-hairline); border-radius: 10px; padding: 16px 18px; margin-bottom: 12px; }
   .card p { font-size: 13.5px; line-height: 1.8; margin: 0 0 8px; text-align: justify; text-wrap: pretty; }
@@ -58,6 +57,7 @@
 <template id="__bundler_thumbnail"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice"><rect width="100" height="100" fill="#CFCDDA"></rect><text x="50" y="60" font-size="24" text-anchor="middle" fill="#1C1C1C" font-family="serif">說</text></svg></template>
 <div class="wrap">
   <header class="hero">
+    <div class="corner"><button class="tbt" id="tg-lang">EN</button><button class="tbt" id="tg-theme">야간</button></div>
     <div class="k ko">MANUAL · 카드 107장 · 챕터 8 · 팩 4종</div>
     <div class="k en">MANUAL · 107 CARDS · 8 CHAPTERS · 4 PACKS</div>
     <h1 class="ko">다른 방식으로<br>다시 보기</h1>
@@ -66,15 +66,15 @@
     <p class="en">An image zettelkasten that promotes everyday photographs into notes, and notes into cards. This manual is how to read a card — and the system behind it.</p>
   </header>
   <nav>
-    <span class="ko" style="display:flex;gap:6px"><a href="#rooms">여덟 개의 방</a><a href="#read">카드 읽는 법</a><a href="#grade">등급·루브릭</a><a href="#taxo">분류 체계</a><a href="#how">만들어진 과정</a></span>
+    <span class="ko" style="display:flex;gap:6px"><a href="#rooms">여덟 개의 컬렉션</a><a href="#read">카드 읽는 법</a><a href="#grade">등급·루브릭</a><a href="#taxo">분류 체계</a><a href="#how">만들어진 과정</a></span>
     <span class="en" style="display:flex;gap:6px"><a href="#rooms">Eight Rooms</a><a href="#read">Reading a Card</a><a href="#grade">Grades</a><a href="#taxo">Taxonomy</a><a href="#how">How</a></span>
   </nav>
 
   <section id="rooms">
-    <h2 class="ko">여덟 개의 방 — 챕터</h2>
+    <h2 class="ko">여덟 개의 컬렉션 — 챕터</h2>
     <h2 class="en">Eight Rooms — the Chapters</h2>
     <div id="chlist"></div>
-    <p class="meta ko">챕터색 = 카드의 틴트 칩 · 컬렉션 넘버 001–107 = 이 순서 · ④부터 조형 요소 중심 · 대표 챕터 «시선이 가는»이 마지막 방.</p>
+    <p class="meta ko">챕터색 = 카드의 틴트 칩 · 컬렉션 넘버 001–107 = 이 순서 · ④부터 조형 요소 중심 · 대표 챕터 «시선이 가는»</p>
     <p class="meta en">Chapter colour = the tint chip on the card · collection numbers 001–107 follow this order · from ④ onward the axis is the formal element · the signature chapter “What the Eye Goes To” is the last room.</p>
   </section>
 
@@ -111,7 +111,7 @@
       <h3>뒷면</h3>
       <ul class="anno">
         <li><b>통찰(thesis)</b> — 이 카드가 하고 싶은 말 전부, 한 문장.</li>
-        <li><b>분석</b> — 요소→상태→구성 원리→효과 순의 객관적 조형 언어. 감정어 금지.</li>
+        <li><b>분석</b> — 요소→상태→구성 원리→효과 순의 객관적 조형 언어.</li>
         <li><b>각주 ※</b> — 합체 조각·시너지 상대. 따라가면 계열이 완성된다.</li>
         <li><b>컬렉션 넘버 · 작성자</b> — NNN/107.</li>
       </ul>
@@ -155,7 +155,6 @@
         <tr><th>연결성</th><td>다른 카드와 계열을 이루는가 → 시너지</td></tr>
         <tr><th>희소성</th><td>다시 만나기 어려운 장면인가</td></tr>
       </table>
-      <p class="meta" style="margin-top:8px">전 카드 유저·클로드 합의 채점. 나쁜 조형도 사유가 쓰였으면 점수를 받을 수 있다. 남의 작품을 찍어도 프레이밍은 내 조형 행위.</p>
     </div>
     <div class="card en">
       <h3>Rubric — 5 criteria × 0–2 points</h3>
@@ -166,7 +165,6 @@
         <tr><th>Connection</th><td>does it form a series with other cards? → synergy</td></tr>
         <tr><th>Rarity</th><td>a scene hard to meet again?</td></tr>
       </table>
-      <p class="meta" style="margin-top:8px">Every card scored by agreement between the maker and Claude. A bad form can still score — if the reason it fails was written down. Framing another’s artwork is still my own formal act.</p>
     </div>
   </section>
 
@@ -183,7 +181,7 @@
     </div>
     <div class="card ko">
       <h3>게슈탈트 — 재분류 원리</h3>
-      <p>근접성 · 유사성 · 연속성 · 폐합 · 전경/배경 · 공동 운명 · 대칭. 한 사진에 여러 원리가 겹칠 수 있다 — 지배 원리를 검은 칩으로.</p>
+      <p>근접성 · 유사성 · 연속성 · 폐합 · 전경/배경 · 공동 운명 · 대칭. 한 사진에 여러 원리가 겹칠 수 있다 — 지배 원리를 검은 칩으로 옮김.</p>
     </div>
     <div class="card en">
       <h3>Gestalt — the regrouping principles</h3>
@@ -235,32 +233,31 @@
     <span class="en">«Ways of Seeing, Again» · Kim Younghwi · 2026<br>An image zettelkasten — 107 cards · 8 chapters · 4 packs.</span>
   </footer>
 </div>
-<nav class="tabbar"><a class="tb" href="archive.html">아카이브</a><a class="tb" href="retro.html">회고</a><a class="tb on" href="guide.html">설명서</a><button class="tbt" id="tg-lang">EN</button><button class="tbt" id="tg-theme">야간</button></nav>
 <script>
 var CHS = [
   ['순간에 존재하는', 'Existing in the Moment', '#B7CEDC', '001–016',
-   '빛과 찰나의 방. 그 시각, 그 자리에서만 성립하는 장면들 — 다시 가도 없는 사진들이라 희소성이 가장 잘 나오는 방이다.',
+   '빛과 찰나의 방. 그 시간, 그 자리에서만 성립하는 장면들 — 다시 가도 없는 사진들임으로 희소성이 가장 잘 나오는 컬렉션이다.',
    'A room of light and the fleeting instant. Scenes that hold only at that time, in that place — you can’t find them again, so this is where rarity shows best.'],
   ['시간이 표면에 쌓아놓은', 'What Time Stacked on the Surface', '#DBC9A8', '017–027',
-   '세월이 재료 위에 새긴 무늬의 방. 벗겨진 페인트, 녹, 물때, 갈라진 틈 — 시간이 천천히 만든 질감들.',
+   '세월이 재료 위에 새긴 작품들의 컬렉션. 벗겨진 페인트, 녹, 물때, 갈라진 틈 — 시간(혹은 산소)으로 천천히 만든 질감들이다.',
    'A room of patterns the years carved into materials. Peeling paint, rust, water stains, cracks — textures time made slowly.'],
   ['그 자리 그대로', 'Left Just Where It Was', '#BECDB4', '028–044',
    '멈춘 것들의 방. 쓸모를 다했는데도 버려지지 않고 제자리에 남은 사물들 — 명맥이 남아 멈춰 있다는 점이 끌림의 핵심이다.',
    'A room of stopped things. Objects past their use yet not thrown away, still in place — the pull is that a thread of life remains, paused.'],
   ['질서, 혹은 일탈', 'Order, or Deviation', '#C3C0DE', '045–061',
-   '조형 요소가 중심이 되는 첫 방. 반복·정렬이 만드는 질서, 그리고 그것을 깨는 단 하나의 예외가 같은 방에 산다.',
+   '조형 요소가 중심이 되는 첫번째 컬렉션. 반복·정렬이 만드는 질서, 그리고 그것을 깨는 단 하나의 예외가 묶어있다.',
    'The first room centred on formal elements. The order that repetition builds, and the single exception that breaks it, live in the same room.'],
   ['어긋난 해석', 'Misread Intent', '#DEBCB8', '062–071',
-   '의도와 읽기가 어긋나는 지점의 방. 창작자와 나 사이에서 해석이 뒤집히는 순간들을 수집했다.',
+   '의도와 읽기가 어긋나는 지점의 컬렉션. 창작자와 나 사이에서 해석이 뒤집히는 순간들을 수집했다.',
    'A room where intent and reading come apart. Moments where interpretation flips between the maker and me.'],
   ['순수한 조형 — 오직 작가주의적인', 'Pure Form — the Purely Authorial', '#D3CEC4', '072–085',
-   '조형 그 자체로 서는 것들의 방. 남의 작품을 찍어도 프레이밍은 내 조형 행위라는 원칙으로 채점했다.',
+   '조형 그 자체로 서는 컬렉션. 작가의 의도가 관람자를 향한 작품을 찍어 이 프레이밍은 내 조형적인 행위라는 원칙으로 채점했다.',
    'A room of things that stand as form itself. Even photographing another’s artwork, framing is my own formal act — that’s the scoring principle.'],
   ['동심원', 'Concentric', '#E0D6A6', '086–096',
-   '원과 반복의 리듬으로 잦아드는 방 — 시선이 중심으로 빨려 들어가는 구조들, 그리고 마지막 방으로 넘어가는 다리.',
+   '원과 반복의 리듬으로 잦아드는 컬렉션 — 시선이 중심으로 빨려 들어가는 구조들, 그리고 마지막 방으로 넘어가는 징검다리.',
    'A room that settles into the rhythm of circles and repetition — structures that pull the eye toward the centre, and a bridge into the final room.'],
   ['시선이 가는 ★', 'What the Eye Goes To ★', '#D6BFD0', '097–107',
-   '본능이 먼저 튀어나와 찍은 사진들이자, 분류에서 떨어져 나간 아웃사이더들의 모임. 분류가 담지 못한 것들이야말로 아직 언어가 도착하지 않은 내 취향의 최전선 — 그래서 이 방이 컬렉션의 마침표다.',
+   '본능이 먼저 튀어나와 찍은 사진들이자, 분류에서 떨어져 나간 아웃사이더들의 모임. 내가 정한 분류로도 담지 못한 것들이야말로 아직 언어로 도착하지 않은 내 취향의 최전선 — 그래서 이 곳이 내 컬렉션의 마침표다.',
    'Photos instinct fired first, and the outsiders that fell out of every category. What classification can’t hold is exactly the front line of a taste with no language yet — which is why this room is the collection’s full stop.'],
 ];
 var ov = {};
@@ -292,6 +289,7 @@ setLang(saved);
   var t = 'light';
   try { t = localStorage.getItem('zettel-theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'); } catch (e) {}
   ap(t);
+  try { matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function (e) { var s = null; try { s = localStorage.getItem('zettel-theme'); } catch (x) {} if (!s) ap(e.matches ? 'dark' : 'light'); }); } catch (e) {}
   b.onclick = function () { var n = r.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'; ap(n); try { localStorage.setItem('zettel-theme', n); } catch (e) {} };
 })();
 </script>

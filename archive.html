@@ -4,24 +4,26 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>다른 방식으로 다시 보기 — 웹 아카이브</title>
-<link rel="stylesheet" href="assets/styles.css">
-<script src="assets/data.js"></script>
-<script src="assets/chapters-final.js"></script>
-<script src="assets/claude-scores.js"></script>
-<script src="assets/user-scores.js"></script>
+<link rel="stylesheet" href="styles.css">
+<script src="data.js"></script>
+<script src="chapters-final.js"></script>
+<script src="claude-scores.js"></script>
+<script src="user-scores.js"></script>
 <style>
 html[data-theme="dark"]{color-scheme:dark;--surface-bg:#1B1A18;--paper-1:#252320;--border-hairline:#3B3833;--text-body:#EAE6DE;--text-secondary:#B8B2A6;--text-meta:#8E887C;--ink-1:#EAE6DE;--ink-2:#C8C2B6;--photo-placeholder-bg:#2C2A27}
 body{margin:0;background:var(--surface-bg);font-family:var(--font-sans);letter-spacing:var(--ls-sans);color:var(--text-body)}
 a{color:var(--ink-1)}a:hover{color:var(--text-secondary)}
 .wrap{max-width:640px;margin:0 auto;padding:0 14px 120px}
-header.hero{padding:34px 4px 14px}
+header.hero{position:relative;padding:34px 4px 14px}
+.corner{position:absolute;top:30px;right:4px;display:flex;gap:6px}
+.tbt{font:inherit;font-size:11.5px;font-weight:700;padding:7px 12px;border:1px solid var(--border-hairline);border-radius:999px;background:var(--paper-1);color:var(--text-secondary);cursor:pointer;white-space:nowrap}
 .k{font-family:var(--font-mono);font-size:11px;letter-spacing:.12em;color:var(--text-meta)}
 h1{font-family:var(--font-card-title);font-weight:400;font-size:30px;line-height:1.3;margin:8px 0 8px}
 .hero p{font-size:13.5px;line-height:1.8;color:var(--text-secondary);margin:0;text-wrap:pretty}
 .mode{display:flex;gap:6px;padding:0 0 4px}
 .mode button{flex:1;font:inherit;font-size:12.5px;font-weight:700;padding:10px 8px;border:1px solid var(--border-hairline);border-radius:9px;background:var(--paper-1);color:var(--text-secondary);cursor:pointer}
 .mode button.on{background:var(--ink-1);color:var(--surface-bg);border-color:var(--ink-1)}
-nav{position:sticky;top:0;z-index:10;background:var(--surface-bg);padding:10px 0;display:flex;gap:6px;overflow-x:auto;-webkit-overflow-scrolling:touch;border-bottom:1px solid var(--border-hairline)}
+nav{position:fixed;left:0;right:0;bottom:0;z-index:60;background:var(--paper-1);padding:10px 12px calc(10px + env(safe-area-inset-bottom));display:flex;gap:6px;overflow-x:auto;-webkit-overflow-scrolling:touch;border-top:1px solid var(--border-hairline)}
 nav::-webkit-scrollbar{display:none}
 nav button{flex-shrink:0;font:inherit;font-size:12px;padding:7px 12px;border:1px solid var(--border-hairline);border-radius:999px;background:var(--paper-1);color:var(--text-secondary);cursor:pointer}
 nav button.on{background:var(--ink-1);color:var(--surface-bg);border-color:var(--ink-1)}
@@ -32,7 +34,7 @@ nav button.on{background:var(--ink-1);color:var(--surface-bg);border-color:var(-
 .views{display:flex;align-items:center;gap:5px;padding-top:12px}
 .views .cnt{font-family:var(--font-mono);font-size:10.5px;color:var(--text-meta);letter-spacing:.06em}
 .views .sp{margin-left:auto;display:flex;gap:4px}
-.views .sp button{font:inherit;font-size:11px;padding:5px 10px;border:1px solid var(--border-hairline);border-radius:999px;background:var(--paper-1);color:var(--text-meta);cursor:pointer}
+.views .sp button{font:inherit;padding:6px 10px;border:1px solid var(--border-hairline);border-radius:999px;background:var(--paper-1);color:var(--text-meta);cursor:pointer;display:flex;align-items:center}
 .views .sp button.on{background:var(--ink-1);color:var(--surface-bg);border-color:var(--ink-1)}
 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;padding-top:10px}
 .grid.g2{grid-template-columns:repeat(2,1fr)}
@@ -42,7 +44,7 @@ nav button.on{background:var(--ink-1);color:var(--surface-bg);border-color:var(-
 .grid.gm{display:block;columns:2;column-gap:6px;padding-top:10px}
 .grid.gm .cell{aspect-ratio:auto;display:block;width:100%;margin-bottom:6px;break-inside:avoid}
 .grid.gm .cell img{height:auto}
-.ov{position:fixed;inset:0;z-index:50;background:rgba(20,18,15,.6);display:none;align-items:center;justify-content:center;padding:14px}
+.ov{position:fixed;inset:0;z-index:70;background:rgba(20,18,15,.6);display:none;align-items:center;justify-content:center;padding:14px}
 .ov.on{display:flex}
 .sheet{width:100%;max-width:560px;max-height:88vh;background:var(--surface-bg);border:1px solid var(--border-hairline);border-radius:14px;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:14px 16px 26px;box-sizing:border-box}
 .sheet .top{display:flex;align-items:center;gap:8px;position:sticky;top:-14px;margin:-14px -16px 0;padding:12px 16px;background:var(--surface-bg);z-index:2}
@@ -58,41 +60,37 @@ h2.tt{font-family:var(--font-card-title);font-weight:400;font-size:22px;margin:6
 .navbtns{display:flex;gap:8px;margin-top:18px}
 .navbtns button{flex:1;font:inherit;font-size:13px;padding:11px;border:1px solid var(--border-hairline);background:var(--paper-1);color:var(--text-body);border-radius:8px;cursor:pointer}
 footer{margin-top:34px;font-family:var(--font-mono);font-size:11px;color:var(--text-meta);line-height:1.9;border-top:1px solid var(--border-hairline);padding-top:14px}
-.tabbar{position:fixed;left:0;right:0;top:auto;bottom:0;z-index:60;display:flex;align-items:center;gap:5px;padding:8px 12px calc(8px + env(safe-area-inset-bottom));background:var(--paper-1);border-top:1px solid var(--border-hairline)}
-.tabbar a.tb{flex:1;text-align:center;font-size:12.5px;font-weight:700;color:var(--text-secondary);text-decoration:none;padding:10px 0;border-radius:9px}
-.tabbar a.tb.on{background:var(--ink-1);color:var(--paper-1)}
-.tabbar .tbt{font:inherit;font-size:11.5px;font-weight:700;padding:10px 11px;border:1px solid var(--border-hairline);border-radius:9px;background:transparent;color:var(--text-secondary);cursor:pointer;white-space:nowrap}
 </style>
 </head>
 <body>
 <template id="__bundler_thumbnail"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice"><rect width="100" height="100" fill="#8FA6B5"></rect><text x="50" y="58" font-size="19" text-anchor="middle" fill="#FFFFFF" font-family="serif">아카이빙</text></svg></template>
 <div class="wrap">
 <header class="hero">
+<div class="corner"><button class="tbt" id="tg-theme">야간</button></div>
 <div class="k">IMAGE ZETTELKASTEN · 2026. 3 – 7 · 김영휘</div>
 <h1>다른 방식으로 다시 보기</h1>
-<p>넉 달의 시각 리터러시 훈련 — 매일 찍은 임시 메모와, 완성된 문장으로 다듬어 카드 107장으로 격상시킨 영구 메모의 아카이브. 제목은 존 버거 «Ways of Seeing»에서 왔다. 카드를 누르면 전문을 읽을 수 있어요.</p>
+<p>4주간의 시각 리터러시 훈련 — 매 주차 동안 찍은 임시 메모와, 완성된 문장으로 다듬어 카드 107장으로 격상시킨 영구 메모의 아카이브. 제목은 존 버거 «Ways of Seeing»에서 따왔다. 카드를 누르면 전문을 읽을 수 있다.</p>
 </header>
 <div class="mode" id="mode"><button class="on">영구 메모 — 카드 107</button><button>임시 메모</button></div>
 <nav id="chips"></nav>
 <div class="chintro" id="chintro"><div class="strip"></div><p></p></div>
-<div class="views"><span class="cnt" id="cnt"></span><span class="sp" id="sp"><button data-g="g3" class="on">3열</button><button data-g="g2">2열</button><button data-g="gm">원본비</button></span></div>
+<div class="views"><span class="cnt" id="cnt"></span><span class="sp" id="sp"><button data-g="g3" class="on" aria-label="3열"><svg viewBox="0 0 14 14" width="13" height="13" fill="currentColor"><rect width="4" height="4"></rect><rect x="5" width="4" height="4"></rect><rect x="10" width="4" height="4"></rect><rect y="5" width="4" height="4"></rect><rect x="5" y="5" width="4" height="4"></rect><rect x="10" y="5" width="4" height="4"></rect><rect y="10" width="4" height="4"></rect><rect x="5" y="10" width="4" height="4"></rect><rect x="10" y="10" width="4" height="4"></rect></svg></button><button data-g="g2" aria-label="2열"><svg viewBox="0 0 14 14" width="13" height="13" fill="currentColor"><rect width="6" height="6"></rect><rect x="8" width="6" height="6"></rect><rect y="8" width="6" height="6"></rect><rect x="8" y="8" width="6" height="6"></rect></svg></button><button data-g="gm" aria-label="원본 비율"><svg viewBox="0 0 14 14" width="13" height="13" fill="currentColor"><rect width="6" height="8"></rect><rect x="8" width="6" height="5"></rect><rect y="9" width="6" height="5"></rect><rect x="8" y="6" width="6" height="8"></rect></svg></button></span></div>
 <div class="grid" id="grid"></div>
 <footer>«다른 방식으로 다시 보기» · 영구 메모 107장 · 54×85.6mm TCG<br><a href="guide.html">카드 읽는 법(설명서)</a> · <a href="retro.html">회고 모음</a> · <a href="index.html">홈</a></footer>
 </div>
-<nav class="tabbar"><a class="tb on" href="archive.html">아카이브</a><a class="tb" href="retro.html">회고</a><a class="tb" href="guide.html">설명서</a><button class="tbt" id="tg-theme">야간</button></nav>
 <div class="ov" id="ov"><div class="sheet" id="sheet"></div></div>
 <script>
 const TINT = { '순간에 존재하는': '#B7CEDC', '시간이 표면에 쌓아놓은': '#DBC9A8', '그 자리 그대로': '#BECDB4', '질서, 혹은 일탈': '#C3C0DE', '어긋난 해석': '#DEBCB8', '순수한 조형(오직 작가주의적인)': '#D3CEC4', '동심원': '#E0D6A6', '시선이 가는': '#D6BFD0' };
 const SHORT = { '순수한 조형(오직 작가주의적인)': '순수한 조형' };
 const DESC = {
-  '순간에 존재하는': '빛과 찰나의 방. 그 시각, 그 자리에서만 성립하는 장면들 — 다시 가도 없는 사진들이라 희소성이 가장 잘 나오는 방이다.',
-  '시간이 표면에 쌓아놓은': '세월이 재료 위에 새긴 무늬의 방. 벗겨진 페인트, 녹, 물때, 갈라진 틈 — 시간이 천천히 만든 질감들.',
+  '순간에 존재하는': '빛과 찰나의 방. 그 시간, 그 자리에서만 성립하는 장면들 — 다시 가도 없는 사진들임으로 희소성이 가장 잘 나오는 컬렉션이다.',
+  '시간이 표면에 쌓아놓은': '세월이 재료 위에 새긴 작품들의 컬렉션. 벗겨진 페인트, 녹, 물때, 갈라진 틈 — 시간(혹은 산소)으로 천천히 만든 질감들이다.',
   '그 자리 그대로': '멈춘 것들의 방. 쓸모를 다했는데도 버려지지 않고 제자리에 남은 사물들 — 명맥이 남아 멈춰 있다는 점이 끌림의 핵심이다.',
-  '질서, 혹은 일탈': '조형 요소가 중심이 되는 첫 방. 반복·정렬이 만드는 질서, 그리고 그것을 깨는 단 하나의 예외가 같은 방에 산다.',
-  '어긋난 해석': '의도와 읽기가 어긋나는 지점의 방. 창작자와 나 사이에서 해석이 뒤집히는 순간들을 수집했다.',
-  '순수한 조형(오직 작가주의적인)': '조형 그 자체로 서는 것들의 방. 남의 작품을 찍어도 프레이밍은 내 조형 행위라는 원칙으로 채점했다.',
-  '동심원': '원과 반복의 리듬으로 잦아드는 방 — 시선이 중심으로 빨려 들어가는 구조들, 그리고 마지막 방으로 넘어가는 다리.',
-  '시선이 가는': '본능이 먼저 튀어나와 찍은 사진들이자, 분류에서 떨어져 나간 아웃사이더들의 모임. 분류가 담지 못한 것들이야말로 아직 언어가 도착하지 않은 내 취향의 최전선 — 그래서 이 방이 컬렉션의 마침표다.'
+  '질서, 혹은 일탈': '조형 요소가 중심이 되는 첫번째 컬렉션. 반복·정렬이 만드는 질서, 그리고 그것을 깨는 단 하나의 예외가 묶어있다.',
+  '어긋난 해석': '의도와 읽기가 어긋나는 지점의 컬렉션. 창작자와 나 사이에서 해석이 뒤집히는 순간들을 수집했다.',
+  '순수한 조형(오직 작가주의적인)': '조형 그 자체로 서는 컬렉션. 작가의 의도가 관람자를 향한 작품을 찍어 이 프레이밍은 내 조형적인 행위라는 원칙으로 채점했다.',
+  '동심원': '원과 반복의 리듬으로 잦아드는 컬렉션 — 시선이 중심으로 빨려 들어가는 구조들, 그리고 마지막 방으로 넘어가는 징검다리.',
+  '시선이 가는': '본능이 먼저 튀어나와 찍은 사진들이자, 분류에서 떨어져 나간 아웃사이더들의 모임. 내가 정한 분류로도 담지 못한 것들이야말로 아직 언어로 도착하지 않은 내 취향의 최전선 — 그래서 이 곳이 내 컬렉션의 마침표다.'
 };
 const GKO = { proximity: '근접성', similarity: '유사성', continuity: '연속성', closure: '폐합', figure: '전경/배경', fate: '공동 운명', symmetry: '대칭', texture: '질감' };
 const ITEMS = (window.ARCHIVE_DATA?.items || []).filter(i => i.kind === 'permanent');
@@ -126,12 +124,13 @@ function updIntro() {
 }
 function buildChips() {
   if (mode === 'perm') {
-    chips.innerHTML = '<button class="on">전체 ' + CARDS.length + '</button>' + CHS.map(c => '<button>' + (SHORT[c] || c) + '</button>').join('');
+    chips.innerHTML = '<button class="on">전체 ' + CARDS.length + '</button>' + CHS.map(c => '<button style="border-color:' + (TINT[c] || '#EEE') + '">' + (SHORT[c] || c) + '</button>').join('');
     [...chips.children].forEach((b, i) => b.onclick = () => {
       filter = i === 0 ? null : CHS[i - 1];
       [...chips.children].forEach((x, j) => x.classList.toggle('on', j === i));
-      render();
+      paintChips(); render();
     });
+    paintChips();
   } else {
     chips.innerHTML = '<button class="on">전체 ' + FLEET.length + '</button>' + FWEEKS.map(w => '<button>' + w + '주차</button>').join('');
     [...chips.children].forEach((b, i) => b.onclick = () => {
@@ -140,6 +139,17 @@ function buildChips() {
       render();
     });
   }
+}
+function paintChips() {
+  if (mode !== 'perm') return;
+  [...chips.children].forEach((x, j) => {
+    if (j === 0) { x.style.background = ''; x.style.color = ''; return; }
+    const t = TINT[CHS[j - 1]] || '#EEE', on = x.classList.contains('on');
+    x.style.borderColor = t;
+    x.style.background = on ? t : '';
+    x.style.color = on ? '#1C1C1C' : '';
+    x.style.fontWeight = on ? '700' : '';
+  });
 }
 buildChips();
 const grid = document.getElementById('grid');
@@ -168,7 +178,7 @@ function open(i) {
   const { c } = { c: CARDS[i] }, it = c.it;
   const g = gradeOf(scoreOf(it.key));
   const no = String(i + 1).padStart(3, '0') + '/107';
-  sheetEl.innerHTML = '<div class="top"><span class="no">' + no + '</span><span class="chip" style="background:' + (TINT[c.ch] || '#EEE') + '">' + (SHORT[c.ch] || c.ch) + '</span><button id="x">닫기 ✕</button></div>' +
+  sheetEl.innerHTML = '<div class="top"><span class="no">' + no + '</span><span class="chip" style="background:' + (TINT[c.ch] || '#EEE') + '">' + (SHORT[c.ch] || c.ch) + '</span><button id="x" aria-label="닫기">✕</button></div>' +
     '<div class="ph"><img src="' + c.photo + '" alt="' + it.title + '"></div>' +
     '<h2 class="tt">' + it.title + (c.piece ? ' <span style="font-size:14px;color:var(--text-meta)">' + c.piece + '/' + (it.photos || []).length + ' 조각</span>' : '') + '</h2>' +
     '<div class="meta2">' + (it.dateLines || []).join(' · ') + (it.gestalt ? ' · 게슈탈트 ' + (GKO[it.gestalt] || it.gestalt) : '') + ' · ' + g[0] + ' ' + g[1] + '</div>' +
@@ -186,7 +196,7 @@ function open(i) {
 }
 function openFleet(i) {
   const c = FLEET[i], it = c.it;
-  sheetEl.innerHTML = '<div class="top"><span class="no">' + c.key + '</span><span class="chip" style="background:#E4DFD4">임시 메모' + (it.axis ? ' · ' + (it.axis.value || it.axis.axis) : '') + '</span><button id="x">닫기 ✕</button></div>' +
+  sheetEl.innerHTML = '<div class="top"><span class="no">' + c.key + '</span><span class="chip" style="background:#E4DFD4">임시 메모' + (it.axis ? ' · ' + (it.axis.value || it.axis.axis) : '') + '</span><button id="x" aria-label="닫기">✕</button></div>' +
     '<div class="ph"><img src="' + c.photo + '" alt="' + it.title + '"></div>' +
     '<h2 class="tt">' + it.title + '</h2>' +
     '<div class="meta2">' + (it.place || '') + (it.gestalt ? ' · 게슈탈트 ' + (GKO[it.gestalt] || it.gestalt) : '') + '</div>' +
@@ -219,6 +229,7 @@ sheetEl.addEventListener('touchend', e => {
   let t = 'light';
   try { t = localStorage.getItem('zettel-theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'); } catch (e) {}
   ap(t);
+  try { matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => { let s = null; try { s = localStorage.getItem('zettel-theme'); } catch (x) {} if (!s) ap(e.matches ? 'dark' : 'light'); }); } catch (e) {}
   b.onclick = () => { const n = r.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'; ap(n); try { localStorage.setItem('zettel-theme', n); } catch (e) {} };
 })();
 render();
