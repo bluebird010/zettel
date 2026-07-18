@@ -6,10 +6,9 @@
 <title>다른 방식으로 다시 보기 — 이미지 제텔카스텐</title>
 <link rel="stylesheet" href="styles.css">
 <style>
-html[data-theme="dark"]{color-scheme:dark;--surface-bg:#1B1A18;--paper-1:#252320;--border-hairline:#3B3833;--text-body:#EAE6DE;--text-secondary:#B8B2A6;--text-meta:#8E887C;--ink-1:#EAE6DE;--ink-2:#C8C2B6;--photo-placeholder-bg:#2C2A27}
 body{margin:0;background:var(--surface-bg);font-family:var(--font-sans);letter-spacing:var(--ls-sans);color:var(--text-body)}
 a{color:var(--ink-1)}a:hover{color:var(--text-secondary)}
-.wrap{max-width:560px;margin:0 auto;padding:0 20px 130px;min-height:100vh;box-sizing:border-box;display:flex;flex-direction:column;justify-content:center}
+.wrap{max-width:560px;margin:0 auto;padding:0 20px 60px;min-height:100vh;box-sizing:border-box;display:flex;flex-direction:column;justify-content:center}
 .k{font-family:var(--font-mono);font-size:11px;letter-spacing:.12em;color:var(--text-meta)}
 h1{font-family:var(--font-card-title);font-weight:400;font-size:38px;line-height:1.35;margin:10px 0 12px}
 .lede{font-size:14.5px;line-height:1.85;color:var(--text-secondary);margin:0 0 26px;text-wrap:pretty}
@@ -21,14 +20,11 @@ h1{font-family:var(--font-card-title);font-weight:400;font-size:38px;line-height
 .menu a span{display:block;font-size:12.5px;line-height:1.7;color:var(--text-secondary);margin-top:3px}
 .menu a .no{float:right;font-family:var(--font-mono);font-size:11px;color:var(--text-meta);margin-top:3px}
 footer{margin-top:30px;font-family:var(--font-mono);font-size:11px;color:var(--text-meta);line-height:1.9}
-.tabbar{position:fixed;left:0;right:0;bottom:0;z-index:60;display:flex;align-items:center;gap:5px;padding:8px 12px calc(8px + env(safe-area-inset-bottom));background:var(--paper-1);border-top:1px solid var(--border-hairline)}
-.tabbar a.tb{flex:1;text-align:center;font-size:12.5px;font-weight:700;color:var(--text-secondary);text-decoration:none;padding:10px 0;border-radius:9px}
-.tabbar .tbt{font:inherit;font-size:11.5px;font-weight:700;padding:10px 11px;border:1px solid var(--border-hairline);border-radius:9px;background:transparent;color:var(--text-secondary);cursor:pointer;white-space:nowrap}
 </style>
 </head>
 <body>
 <div class="wrap">
-<div class="k">IMAGE ZETTELKASTEN · 2026. 3 – 7 · 김영휘</div>
+<div class="k">IMAGE ZETTELKASTEN · 2026. 5 – 7 · 김영휘</div>
 <h1>다른 방식으로<br>다시 보기</h1>
 <p class="lede">일상 사진을 메모로, 메모를 카드로 격상시킨 이미지 제텔카스텐 — 영구 메모 107장 · 챕터 8 · 팩 4종. 제목은 존 버거 «Ways of Seeing»에서 빌려, 반 발짝 비틀었다.</p>
 <div class="strips"><span style="background:#D6BFD0"></span><span style="background:#B7CEDC"></span><span style="background:#DBC9A8"></span><span style="background:#BECDB4"></span><span style="background:#C3C0DE"></span><span style="background:#DEBCB8"></span><span style="background:#D3CEC4"></span><span style="background:#E0D6A6"></span></div>
@@ -39,16 +35,5 @@ footer{margin-top:30px;font-family:var(--font-mono);font-size:11px;color:var(--t
 </div>
 <footer>«다른 방식으로 다시 보기» · 김영휘 · 2026</footer>
 </div>
-<nav class="tabbar"><a class="tb" href="archive.html">아카이브</a><a class="tb" href="retro.html">회고</a><a class="tb" href="guide.html">설명서</a><button class="tbt" id="tg-theme">야간</button></nav>
-<script>
-(function () {
-  var r = document.documentElement, b = document.getElementById('tg-theme');
-  function ap(t) { r.setAttribute('data-theme', t); b.textContent = t === 'dark' ? '주간' : '야간'; }
-  var t = 'light';
-  try { t = localStorage.getItem('zettel-theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'); } catch (e) {}
-  ap(t);
-  b.onclick = function () { var n = r.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'; ap(n); try { localStorage.setItem('zettel-theme', n); } catch (e) {} };
-})();
-</script>
 </body>
 </html>
